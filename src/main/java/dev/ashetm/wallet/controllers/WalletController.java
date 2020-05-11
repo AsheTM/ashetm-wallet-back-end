@@ -19,10 +19,9 @@ import dev.ashetm.wallet.views.ClientsResponseView;
 import dev.ashetm.wallet.views.TransactionResponseView;
 import dev.ashetm.wallet.views.TransactionsResponseView;
 
-@RequestMapping("/v1/api/client")
 public interface WalletController {
 
-	@RequestMapping("/")
+	@RequestMapping("/v1/api/client")
 	interface ClientController {
 
 		@GetMapping("/")
@@ -36,7 +35,7 @@ public interface WalletController {
 		
 	}
 
-	@RequestMapping("/{idC}/account")
+	@RequestMapping("/v1/api/client/{idC}/account")
 	interface AccountController {
 
 		@GetMapping("/")
@@ -55,14 +54,14 @@ public interface WalletController {
 		AccountResponseView deposit(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount, @RequestBody Transaction transaction) throws NotFoundException;
 		
 		@PatchMapping("/{idA}")
-		AccountResponseView activateAccount(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount) throws NotFoundException;
+		Boolean activateAccount(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount) throws NotFoundException;
 		
 		@DeleteMapping("/{idA}")
-		AccountResponseView deactivateAccount(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount) throws NotFoundException;
+		Boolean deactivateAccount(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount) throws NotFoundException;
 		
 	}
 
-	@RequestMapping("/{idC}/account/{idA}/transaction")
+	@RequestMapping("/v1/api/client/{idC}/account/{idA}/transaction")
 	interface TransactionController {
 
 		@GetMapping("/")

@@ -20,14 +20,14 @@ public class TransactionControllerImpl implements WalletController.TransactionCo
 	public TransactionControllerImpl(TransactionService transactionService) {
 		this.transactionService = transactionService;
 	}
-
+	
 	@Override
 	public TransactionsResponseView showTransactions(int idClient, int idAccount) throws NotFoundException {
 		List<Transaction> transactions = this.transactionService.getAllTransaction(idClient, idAccount);
 		
 		return TransactionsResponseView.from(transactions);
 	}
-
+	
 	@Override
 	public TransactionResponseView showTransaction(int idClient, int idAccount, int idTransaction)
 			throws NotFoundException {

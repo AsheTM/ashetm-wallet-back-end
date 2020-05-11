@@ -3,6 +3,11 @@ package dev.ashetm.wallet.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.ashetm.wallet.entities.Account;
@@ -70,21 +75,27 @@ public class AccountControllerImpl implements WalletController.AccountController
 	}
 
 	@Override
-	public AccountResponseView activateAccount(int idClient, int idAccount) throws NotFoundException {
+	public Boolean activateAccount(int idClient, int idAccount) throws NotFoundException {
 		Account account = this.accountService.getAccount(idClient, idAccount);
-		if(account != null)
+		Boolean result = null;
+		if(account != null) {
 			account = this.accountProcess.activateAccount(account);
+			result = Boolean.valueOf(account.isActivate());
+		}
 		
-		return AccountResponseView.from(account);
+		return result;
 	}
 
 	@Override
-	public AccountResponseView deactivateAccount(int idClient, int idAccount) throws NotFoundException {
+	public Boolean deactivateAccount(int idClient, int idAccount) throws NotFoundException {
 		Account account = this.accountService.getAccount(idClient, idAccount);
-		if(account != null)
+		Boolean result = null;
+		if(account != null) {
 			account = this.accountProcess.deactivateAccount(account);
+			result = Boolean.valueOf(account.isActivate());
+		}
 		
-		return AccountResponseView.from(account);
+		return result;
 	}
 
 }
