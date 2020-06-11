@@ -1,9 +1,20 @@
 package dev.ashetm.wallet.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
+@Getter
+@Builder
+@AllArgsConstructor
+public class Client implements Serializable {
 	
 	private static int counter = 0;
 	
@@ -11,77 +22,34 @@ public class Client {
 	
 	private int id = -1;
 	
-	private String fullName;
-	
-	private List<Account> accounts = new ArrayList<>();
+	@Setter
+	private String firstName;
+
+	@Setter
+	private String lastName;
+
+	@Setter
+	private List<Card> cards = new ArrayList<>();
 
 	public Client() {
 		this.id = counter;
 	}
 
-	public Client(String fullName) {
+	public Client(String firstName, String lastName) {
 		this.id = counter;
-		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
-	public Client(String fullName, List<Account> accounts) {
+	public Client(String firstName, String lastName, List<Card> cards) {
 		this.id = counter;
-		this.fullName = fullName;
-		this.accounts = accounts;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public List<Account> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(List<Account> accounts) {
-		this.accounts = accounts;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.cards = cards;
 	}
 	
-	public void setAccount(Account account) {
-		this.accounts.add(account);
-	}
-
-	public static ClientBuilder builder() {
-		return new ClientBuilder();
-	}
-	
-	public static class ClientBuilder {
-		
-		private Client client = new Client();
-
-		public ClientBuilder() { }
-		
-		public ClientBuilder(Client transaction) {
-			this.client = transaction;
-		}
-		
-		public ClientBuilder fullName(String fullName) {
-			this.client.setFullName(fullName);
-			return this;
-		}
-		
-		public ClientBuilder accounts(List<Account> accounts) {
-			this.client.setAccounts(accounts);
-			return this;
-		}
-		
-		public Client build() {
-			return this.client;
-		}
-		
+	public void setCard(Card card) {
+		this.cards.add(card);
 	}
 
 }

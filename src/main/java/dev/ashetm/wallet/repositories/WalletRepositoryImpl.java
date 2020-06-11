@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import dev.ashetm.wallet.entities.Account;
+import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.entities.Transaction;
 import dev.ashetm.wallet.exceptions.ClientNotFoundException;
@@ -17,9 +17,9 @@ import dev.ashetm.wallet.exceptions.NotFoundException;
 public class WalletRepositoryImpl implements WalletRepository {
 	
 	private final static int 
-			nbrClients = 3, 
-			nbrAccountsPerClient = 1, 
-			nbrTransactionsPerAccount = 2;
+			nbrClients = 2, 
+			nbrCardPerClient = 2, 
+			nbrTransactionsPerCard = 2;
 	
 	public static List<Client> clients = new ArrayList<>();
 	
@@ -34,22 +34,24 @@ public class WalletRepositoryImpl implements WalletRepository {
 		FOREACH_CLIENT:
 		for(int i = 0; i < nbrClients; i++) {
 			Client client = Client.builder()
-					.fullName("SampleFullName" + i)
+					.firstName("FirstName " + i)
+					.lastName("LastName " + i)
 					.build();
-			List<Account> accounts = new ArrayList<>();
+			List<Card> cards = new ArrayList<>();
 
 			System.out.println("Client id: " + client.getId());
 			
-			FOREACH_ACCOUNT:
-			for(int j = 0; j < nbrAccountsPerClient; j++) {
-				Account account = Account.builder()
+			FOREACH_CARD:
+			for(int j = 0; j < nbrCardPerClient; j++) {
+				Card card = Card.builder()
+						.balance(BigDecimal.ZERO)
 						.build();
 				List<Transaction> transactions = new ArrayList<>();
 
-				System.out.println("Account id: " + account.getId());
+				System.out.println("Card id: " + card.getId());
 				
 				ADD_TRANSACTIONS:
-				for(int k = 0; k < nbrTransactionsPerAccount; k++) {
+				for(int k = 0; k < nbrTransactionsPerCard; k++) {
 					BigDecimal amount = BigDecimal.valueOf(100_000);
 					Transaction transaction = Transaction.builder()
 							.amount(amount)
@@ -60,12 +62,12 @@ public class WalletRepositoryImpl implements WalletRepository {
 					transactions.add(transaction);
 				}
 
-				account.setTransactions(transactions);
-				accounts.add(account);
+				card.setTransactions(transactions);
+				cards.add(card);
 //				System.out.println("T: " + transactions.size());
 			}
 
-			client.setAccounts(accounts);
+			client.setCards(cards);
 			clients.add(client);
 //			System.out.println("A: " + accounts.size());
 		}

@@ -1,9 +1,20 @@
 package dev.ashetm.wallet.entities;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class Transaction {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import springfox.documentation.annotations.ApiIgnore;
+
+@ApiIgnore
+@Getter
+@Builder
+@AllArgsConstructor
+public class Transaction implements Serializable {
 	
 	private static int counter = 0;
 	
@@ -11,6 +22,7 @@ public class Transaction {
 	
 	private int id = -1;
 	
+	@Setter
 	private BigDecimal amount = BigDecimal.ZERO;
 	
 	private LocalDate date = LocalDate.now();
@@ -22,47 +34,6 @@ public class Transaction {
 	public Transaction(BigDecimal amount) {
 		this.id = counter;
 		this.amount = amount;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public BigDecimal getAmount() {
-		return amount;
-	}
-
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public static TransactionBuilder builder() {
-		return new TransactionBuilder();
-	}
-	
-	public static class TransactionBuilder {
-		
-		private Transaction transaction = new Transaction();
-
-		public TransactionBuilder() { }
-		
-		public TransactionBuilder(Transaction transaction) {
-			this.transaction = transaction;
-		}
-		
-		public TransactionBuilder amount(BigDecimal amount) {
-			this.transaction.setAmount(amount);
-			return this;
-		}
-		
-		public Transaction build() {
-			return this.transaction;
-		}
-		
 	}
 	
 	@Override

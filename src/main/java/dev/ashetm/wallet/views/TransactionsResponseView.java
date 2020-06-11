@@ -1,29 +1,31 @@
 package dev.ashetm.wallet.views;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import dev.ashetm.wallet.entities.Transaction;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@NoArgsConstructor
 public class TransactionsResponseView implements ResponseView {
-	
-	private List<Transaction> transactions;
-	
-	private LocalDate now = LocalDate.now();
 
-	public TransactionsResponseView() {
-	}
+	@ApiModelProperty(
+			name = "transactions", 
+			dataType = "Transaction[]", 
+			readOnly = false, 
+			allowEmptyValue = true, 
+			notes = "List of Transaction object to send to front", 
+			position = 0, 
+			hidden = false, 
+			required = true)
+	@Setter
+	private List<Transaction> transactions;
 
 	public TransactionsResponseView(List<Transaction> transactions) {
 		super();
-		this.transactions = transactions;
-	}
-
-	public List<Transaction> getTransactions() {
-		return transactions;
-	}
-
-	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
 	

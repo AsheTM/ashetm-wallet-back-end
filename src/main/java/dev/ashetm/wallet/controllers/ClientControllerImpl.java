@@ -3,6 +3,7 @@ package dev.ashetm.wallet.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.ashetm.wallet.entities.Client;
@@ -12,6 +13,10 @@ import dev.ashetm.wallet.views.ClientResponseView;
 import dev.ashetm.wallet.views.ClientsResponseView;
 
 @RestController
+@CrossOrigin(
+		origins = { "http://localhost:4200", "http://localhost:4201" }, 
+		maxAge = 3_600, 
+		allowedHeaders = { "*" })
 public class ClientControllerImpl implements WalletController.ClientController {
 
 	private ClientService clientService;

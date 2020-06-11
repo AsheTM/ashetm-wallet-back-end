@@ -8,67 +8,129 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import dev.ashetm.wallet.entities.Account;
+import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.entities.Transaction;
 import dev.ashetm.wallet.exceptions.NotFoundException;
-import dev.ashetm.wallet.views.AccountResponseView;
-import dev.ashetm.wallet.views.AccountsResponseView;
+import dev.ashetm.wallet.views.CardResponseView;
+import dev.ashetm.wallet.views.CardsResponseView;
 import dev.ashetm.wallet.views.ClientResponseView;
 import dev.ashetm.wallet.views.ClientsResponseView;
 import dev.ashetm.wallet.views.TransactionResponseView;
 import dev.ashetm.wallet.views.TransactionsResponseView;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 public interface WalletController {
 
+	@Api(
+			position = 0, 
+			hidden = false, 
+			description = "All endpoints that concern client")
 	@RequestMapping("/v1/api/client")
 	interface ClientController {
 
+		@ApiOperation(
+				value = "Get all clients")
 		@GetMapping("/")
 		ClientsResponseView showClients() throws NotFoundException;
-		
-		@GetMapping("/{idC}")
-		ClientResponseView showClient(@RequestParam("idC") int idClient) throws NotFoundException;
-		
+
+		@ApiOperation(
+				value = "Get one client")
+		@GetMapping("/{idClient}")
+		ClientResponseView showClient(
+				@RequestParam("idClient") int idClient) throws NotFoundException;
+
+		@ApiOperation(
+				value = "Save a client")
 		@PostMapping("/")
-		ClientResponseView addClient(@RequestBody Client client) throws NotFoundException;
+		ClientResponseView addClient(
+				@RequestBody Client client) throws NotFoundException;
 		
 	}
 
-	@RequestMapping("/v1/api/client/{idC}/account")
-	interface AccountController {
 
+	@Api(
+			position = 1, 
+			hidden = false, 
+			description = "All endpoints that concern card")
+	@RequestMapping("/v1/api/client/{idClient}/card")
+	interface CardController {
+
+		@ApiOperation(
+				value = "Get all cards from a client")
 		@GetMapping("/")
-		AccountsResponseView showAccounts(@RequestParam("idC") int idClient) throws NotFoundException;
+		CardsResponseView showCards(
+				@RequestParam("idClient") int idClient) throws NotFoundException;
 
-		@GetMapping("/{idA}")
-		AccountResponseView showAccount(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount) throws NotFoundException;
-		
+		@ApiOperation(
+				value = "Get one card from a client")
+		@GetMapping("/{idCard}")
+		CardResponseView showCard(
+				@RequestParam("idClient") int idClient, 
+				@RequestParam("idCard") int idCard) throws NotFoundException;
+
+		@ApiOperation(
+				value = "Save a card to a client")
 		@PostMapping("/")
-		AccountResponseView addAccount(@RequestParam("idC") int idClient, @RequestBody Account account) throws NotFoundException;
+		CardResponseView addCard(
+				@RequestParam("idClient") int idClient, 
+				@RequestBody Card card) throws NotFoundException;
 
-		@PostMapping("/{idA}/withdraw")
-		AccountResponseView withdraw(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount, @RequestBody Transaction transaction) throws NotFoundException;
+		@ApiOperation(
+				value = "Make a withdraw transaction in a card for a client")
+		@PostMapping("/{idCard}/withdraw")
+		CardResponseView withdraw(
+				@RequestParam("idClient") int idClient, 
+				@RequestParam("idCard") int idCard, 
+				@RequestBody Transaction transaction) throws NotFoundException;
 
-		@PostMapping("/{idA}/deposit")
-		AccountResponseView deposit(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount, @RequestBody Transaction transaction) throws NotFoundException;
-		
-		@PatchMapping("/{idA}")
-		Boolean activateAccount(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount) throws NotFoundException;
-		
-		@DeleteMapping("/{idA}")
-		Boolean deactivateAccount(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount) throws NotFoundException;
+		@ApiOperation(
+				value = "Make a deposit transaction in a card for a client")
+		@PostMapping("/{idCard}/deposit")
+		CardResponseView deposit(
+				@RequestParam("idClient") int idClient, 
+				@RequestParam("idCard") int idCard, 
+				@RequestBody Transaction transaction) throws NotFoundException;
+
+		@ApiOperation(
+				value = "Activate a card of a client")
+		@PatchMapping("/{idCard}")
+		Boolean activateCard(
+				@RequestParam("idClient") int idClient, 
+				@RequestParam("idCard") int idCard) throws NotFoundException;
+
+		@ApiOperation(
+				value = "Deactivate a card of a client")
+		@DeleteMapping("/{idCard}")
+		Boolean deactivateCard(
+				@RequestParam("idClient") int idClient, 
+				@RequestParam("idCard") int idCard) throws NotFoundException;
 		
 	}
 
-	@RequestMapping("/v1/api/client/{idC}/account/{idA}/transaction")
+
+	@Api(
+			position = 2, 
+			hidden = false, 
+			description = "All endpoints that concern transaction")
+	@RequestMapping("/v1/api/client/{idClient}/card/{idCard}/transaction")
 	interface TransactionController {
 
+		@ApiOperation(
+				value = "Get all transactions of a card of a client")
 		@GetMapping("/")
-		TransactionsResponseView showTransactions(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount) throws NotFoundException;
+		TransactionsResponseView showTransactions(
+				@RequestParam("idClient") int idClient, 
+				@RequestParam("idCard") int idCard) throws NotFoundException;
 
-		@GetMapping("/{idT}")
-		TransactionResponseView showTransaction(@RequestParam("idC") int idClient, @RequestParam("idA") int idAccount, @RequestParam("idT") int idTransaction) throws NotFoundException;
+		@ApiOperation(
+				value = "Get one transaction of a card of a client")
+		@GetMapping("/{idTransaction}")
+		TransactionResponseView showTransaction(
+				@RequestParam("idClient") int idClient, 
+				@RequestParam("idCard") int idCard, 
+				@RequestParam("idTransaction") int idTransaction) throws NotFoundException;
 		
 	}
 

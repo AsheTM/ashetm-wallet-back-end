@@ -4,13 +4,9 @@ import java.io.PrintStream;
 import java.util.List;
 import java.util.function.BiFunction;
 
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-
-import dev.ashetm.wallet.entities.Account;
+import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.entities.Transaction;
 
-@Aspect
 public class PrintingUtil {
 	
 	private static final int lengthReceipt = 60;
@@ -24,7 +20,7 @@ public class PrintingUtil {
 		return stringBuilder.toString();
 	}; 
 	
-	public static Account printReceipt(Account account) {
+	public static Card printReceipt(Card account) {
 		out.println();
 		out.println(repeater.apply("*", lengthReceipt));
 		out.println("\t\tReceipt Account           ");
@@ -36,7 +32,6 @@ public class PrintingUtil {
 		return account;
 	}
 	
-	@Before("execution(*)")
 	public static void printTransactions(List<Transaction> transactions) {
 		if(!(!transactions.equals(null) && transactions.size() != 0)) return;
 		for(Transaction transaction: transactions)
