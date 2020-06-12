@@ -6,9 +6,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import dev.ashetm.wallet.enums.CardType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 import springfox.documentation.annotations.ApiIgnore;
@@ -25,17 +29,28 @@ public class Card implements Serializable {
 	
 	private int id = -1;
 	
+	@Default
 	@Setter
 	private BigDecimal balance = BigDecimal.valueOf(0.0);
 	
+	@NotNull
 	@Setter
 	private CardType type;
 	
+	@Size(
+			min = 4, 
+			max = 4, 
+			message = "Password must be 4 digits")
+	@Setter
+	private String password;
+	
+	@Default
 	@Setter
 	private boolean isActivate = false;
 	
 	private List<Transaction> transactions = new ArrayList<>();
 	
+	@Default
 	private LocalDate date = LocalDate.now();
 
 	public Card() {

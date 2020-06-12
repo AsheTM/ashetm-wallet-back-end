@@ -45,6 +45,7 @@ public class WalletRepositoryImpl implements WalletRepository {
 			for(int j = 0; j < nbrCardPerClient; j++) {
 				Card card = Card.builder()
 						.balance(BigDecimal.ZERO)
+						.password(j == 0 ? null : "1234")
 						.build();
 				List<Transaction> transactions = new ArrayList<>();
 
