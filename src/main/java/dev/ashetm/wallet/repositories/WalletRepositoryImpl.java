@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.entities.Transaction;
+import dev.ashetm.wallet.enums.CardType;
 import dev.ashetm.wallet.exceptions.ClientNotFoundException;
 import dev.ashetm.wallet.exceptions.NotFoundException;
 
@@ -47,6 +48,7 @@ public class WalletRepositoryImpl implements WalletRepository {
 				Card card = Card.builder()
 						.balance(BigDecimal.ZERO)
 						.password(j == 0 ? null : "1234")
+						.type(j % 2 == 0 ? CardType.VISA : CardType.MASTERCARD)
 						.build();
 				List<Transaction> transactions = new ArrayList<>();
 
