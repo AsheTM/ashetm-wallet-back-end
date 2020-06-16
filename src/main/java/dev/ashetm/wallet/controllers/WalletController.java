@@ -3,10 +3,10 @@ package dev.ashetm.wallet.controllers;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.entities.Client;
@@ -39,7 +39,7 @@ public interface WalletController {
 				value = "Get one client")
 		@GetMapping("/{idClient}")
 		ClientResponseView showClient(
-				@RequestParam("idClient") int idClient) throws NotFoundException;
+				@PathVariable("idClient") int idClient) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Save a client")
@@ -61,51 +61,51 @@ public interface WalletController {
 				value = "Get all cards from a client")
 		@GetMapping("/")
 		CardsResponseView showCards(
-				@RequestParam("idClient") int idClient) throws NotFoundException;
+				@PathVariable("idClient") int idClient) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Get one card from a client")
 		@GetMapping("/{idCard}")
 		CardResponseView showCard(
-				@RequestParam("idClient") int idClient, 
-				@RequestParam("idCard") int idCard) throws NotFoundException;
+				@PathVariable("idClient") int idClient, 
+				@PathVariable("idCard") int idCard) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Save a card to a client")
 		@PostMapping("/")
 		CardResponseView addCard(
-				@RequestParam("idClient") int idClient, 
+				@PathVariable("idClient") int idClient, 
 				@RequestBody Card card) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Make a withdraw transaction in a card for a client")
 		@PostMapping("/{idCard}/withdraw")
 		CardResponseView withdraw(
-				@RequestParam("idClient") int idClient, 
-				@RequestParam("idCard") int idCard, 
+				@PathVariable("idClient") int idClient, 
+				@PathVariable("idCard") int idCard, 
 				@RequestBody Transaction transaction) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Make a deposit transaction in a card for a client")
 		@PostMapping("/{idCard}/deposit")
 		CardResponseView deposit(
-				@RequestParam("idClient") int idClient, 
-				@RequestParam("idCard") int idCard, 
+				@PathVariable("idClient") int idClient, 
+				@PathVariable("idCard") int idCard, 
 				@RequestBody Transaction transaction) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Activate a card of a client")
 		@PatchMapping("/{idCard}")
 		Boolean activateCard(
-				@RequestParam("idClient") int idClient, 
-				@RequestParam("idCard") int idCard) throws NotFoundException;
+				@PathVariable("idClient") int idClient, 
+				@PathVariable("idCard") int idCard) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Deactivate a card of a client")
 		@DeleteMapping("/{idCard}")
 		Boolean deactivateCard(
-				@RequestParam("idClient") int idClient, 
-				@RequestParam("idCard") int idCard) throws NotFoundException;
+				@PathVariable("idClient") int idClient, 
+				@PathVariable("idCard") int idCard) throws NotFoundException;
 		
 	}
 
@@ -121,16 +121,16 @@ public interface WalletController {
 				value = "Get all transactions of a card of a client")
 		@GetMapping("/")
 		TransactionsResponseView showTransactions(
-				@RequestParam("idClient") int idClient, 
-				@RequestParam("idCard") int idCard) throws NotFoundException;
+				@PathVariable("idClient") int idClient, 
+				@PathVariable("idCard") int idCard) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Get one transaction of a card of a client")
 		@GetMapping("/{idTransaction}")
 		TransactionResponseView showTransaction(
-				@RequestParam("idClient") int idClient, 
-				@RequestParam("idCard") int idCard, 
-				@RequestParam("idTransaction") int idTransaction) throws NotFoundException;
+				@PathVariable("idClient") int idClient, 
+				@PathVariable("idCard") int idCard, 
+				@PathVariable("idTransaction") int idTransaction) throws NotFoundException;
 		
 	}
 

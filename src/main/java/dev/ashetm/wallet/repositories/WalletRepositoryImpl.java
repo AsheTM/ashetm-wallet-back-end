@@ -34,6 +34,7 @@ public class WalletRepositoryImpl implements WalletRepository {
 		FOREACH_CLIENT:
 		for(int i = 0; i < nbrClients; i++) {
 			Client client = Client.builder()
+					.id(i)
 					.firstName("FirstName " + i)
 					.lastName("LastName " + i)
 					.build();
