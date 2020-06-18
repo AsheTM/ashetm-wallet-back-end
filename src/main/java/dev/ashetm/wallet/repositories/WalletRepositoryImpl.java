@@ -47,7 +47,7 @@ public class WalletRepositoryImpl implements WalletRepository {
 			for(int j = 0; j < nbrCardPerClient; j++) {
 				Card card = Card.builder()
 						.balance(BigDecimal.ZERO)
-						.password(j == 0 ? null : "1234")
+						.password("1234")
 						.type(j % 2 == 0 ? CardType.VISA : CardType.MASTERCARD)
 						.build();
 				List<Transaction> transactions = new ArrayList<>();

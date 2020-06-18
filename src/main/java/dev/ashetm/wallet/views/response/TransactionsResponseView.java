@@ -1,4 +1,4 @@
-package dev.ashetm.wallet.views;
+package dev.ashetm.wallet.views.response;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
-public class TransactionsResponseView implements ResponseView {
+public class TransactionsResponseView implements IResponseView {
 
 	@ApiModelProperty(
 			name = "transactions", 

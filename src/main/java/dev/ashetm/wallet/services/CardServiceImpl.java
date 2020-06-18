@@ -48,4 +48,11 @@ public class CardServiceImpl implements CardService {
 		return card;
 	}
 
+	@Override
+	public boolean authenticate(int idClient, int idCard, String password) {
+		Card card = this.getCard(idClient, idCard);
+		
+		return card.getPassword().equals(password);
+	}
+
 }

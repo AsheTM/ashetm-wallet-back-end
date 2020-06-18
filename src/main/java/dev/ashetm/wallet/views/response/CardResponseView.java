@@ -1,4 +1,4 @@
-package dev.ashetm.wallet.views;
+package dev.ashetm.wallet.views.response;
 
 import dev.ashetm.wallet.entities.Card;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
-public class CardResponseView implements ResponseView {
+public class CardResponseView implements IResponseView {
 
 	@ApiModelProperty(
 			name = "card", 
@@ -23,7 +23,7 @@ public class CardResponseView implements ResponseView {
 	private Card card;
 
 	public CardResponseView(Card card) {
-		super();
+//		super();
 		this.card = card;
 	}
 	

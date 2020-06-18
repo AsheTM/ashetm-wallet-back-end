@@ -11,5 +11,7 @@ public interface CardService {
 	List<Card> getAllCards(int idClient);
 	
 	Card saveCard(int idClient, Card card);
+	
+	boolean authenticate(int idClient, int idCard, String password);
 
 }

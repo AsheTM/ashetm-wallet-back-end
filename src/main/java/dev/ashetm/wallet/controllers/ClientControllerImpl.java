@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.exceptions.NotFoundException;
 import dev.ashetm.wallet.services.ClientService;
-import dev.ashetm.wallet.views.ClientResponseView;
-import dev.ashetm.wallet.views.ClientsResponseView;
+import dev.ashetm.wallet.views.response.ClientResponseView;
+import dev.ashetm.wallet.views.response.ClientsResponseView;
 
 @RestController
 @CrossOrigin(

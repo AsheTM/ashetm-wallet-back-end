@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -37,6 +38,7 @@ public class Card implements Serializable {
 	@Setter
 	private CardType type;
 	
+	@NotEmpty
 	@Size(
 			min = 4, 
 			max = 4, 

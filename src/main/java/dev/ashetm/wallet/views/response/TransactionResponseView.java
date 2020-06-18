@@ -1,4 +1,4 @@
-package dev.ashetm.wallet.views;
+package dev.ashetm.wallet.views.response;
 
 import dev.ashetm.wallet.entities.Transaction;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Getter
 @NoArgsConstructor
-public class TransactionResponseView implements ResponseView {
+public class TransactionResponseView implements IResponseView {
 
 	@ApiModelProperty(
 			name = "transaction", 

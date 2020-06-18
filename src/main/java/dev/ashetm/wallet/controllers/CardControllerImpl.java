@@ -12,8 +12,11 @@ import dev.ashetm.wallet.exceptions.NotFoundException;
 import dev.ashetm.wallet.processes.CardProcess;
 import dev.ashetm.wallet.processes.WalletProcess;
 import dev.ashetm.wallet.services.CardService;
-import dev.ashetm.wallet.views.CardResponseView;
-import dev.ashetm.wallet.views.CardsResponseView;
+import dev.ashetm.wallet.views.request.AuthenticateCardRequestView;
+import dev.ashetm.wallet.views.response.ActivateCardResponseView;
+import dev.ashetm.wallet.views.response.AuthenticateCardResponseView;
+import dev.ashetm.wallet.views.response.CardResponseView;
+import dev.ashetm.wallet.views.response.CardsResponseView;
 
 @RestController
 @CrossOrigin(
@@ -48,6 +51,14 @@ public class CardControllerImpl implements WalletController.CardController {
 		
 		return CardResponseView.from(card);
 	}
+	
+	@Override
+	public AuthenticateCardResponseView authenticate(int idClient, int idCard, AuthenticateCardRequestView authenticateCardRequestView) throws NotFoundException {
+		String password = authenticateCardRequestView.getPassword();
+		boolean authenticate = this.cardService.authenticate(idClient, idCard, password);
+		
+		return AuthenticateCardResponseView.from(authenticate);
+	}
 
 	@Override
 	public CardResponseView withdraw(int idClient, int idCard, Transaction transaction) 
@@ -75,7 +86,7 @@ public class CardControllerImpl implements WalletController.CardController {
 	}
 
 	@Override
-	public Boolean activateCard(int idClient, int idCard) throws NotFoundException {
+	public ActivateCardResponseView activateCard(int idClient, int idCard) throws NotFoundException {
 		Card account = this.cardService.getCard(idClient, idCard);
 		Boolean result = null;
 		if(account != null) {
@@ -83,11 +94,11 @@ public class CardControllerImpl implements WalletController.CardController {
 			result = Boolean.valueOf(account.isActivate());
 		}
 		
-		return result;
+		return ActivateCardResponseView.from(result);
 	}
 
 	@Override
-	public Boolean deactivateCard(int idClient, int idCard) throws NotFoundException {
+	public ActivateCardResponseView deactivateCard(int idClient, int idCard) throws NotFoundException {
 		Card card = this.cardService.getCard(idClient, idCard);
 		Boolean result = null;
 		if(card != null) {
@@ -95,7 +106,7 @@ public class CardControllerImpl implements WalletController.CardController {
 			result = Boolean.valueOf(card.isActivate());
 		}
 		
-		return result;
+		return ActivateCardResponseView.from(result);
 	}
 
 }

@@ -12,12 +12,15 @@ import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.entities.Transaction;
 import dev.ashetm.wallet.exceptions.NotFoundException;
-import dev.ashetm.wallet.views.CardResponseView;
-import dev.ashetm.wallet.views.CardsResponseView;
-import dev.ashetm.wallet.views.ClientResponseView;
-import dev.ashetm.wallet.views.ClientsResponseView;
-import dev.ashetm.wallet.views.TransactionResponseView;
-import dev.ashetm.wallet.views.TransactionsResponseView;
+import dev.ashetm.wallet.views.request.AuthenticateCardRequestView;
+import dev.ashetm.wallet.views.response.ActivateCardResponseView;
+import dev.ashetm.wallet.views.response.AuthenticateCardResponseView;
+import dev.ashetm.wallet.views.response.CardResponseView;
+import dev.ashetm.wallet.views.response.CardsResponseView;
+import dev.ashetm.wallet.views.response.ClientResponseView;
+import dev.ashetm.wallet.views.response.ClientsResponseView;
+import dev.ashetm.wallet.views.response.TransactionResponseView;
+import dev.ashetm.wallet.views.response.TransactionsResponseView;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -76,6 +79,12 @@ public interface WalletController {
 		CardResponseView addCard(
 				@PathVariable("idClient") int idClient, 
 				@RequestBody Card card) throws NotFoundException;
+		
+		@PostMapping("/{idCard}/authenticate")
+		AuthenticateCardResponseView authenticate(
+				@PathVariable("idClient") int idClient, 
+				@PathVariable("idCard") int idCard, 
+				@RequestBody AuthenticateCardRequestView authenticateCardRequestView) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Make a withdraw transaction in a card for a client")
@@ -96,14 +105,14 @@ public interface WalletController {
 		@ApiOperation(
 				value = "Activate a card of a client")
 		@PatchMapping("/{idCard}")
-		Boolean activateCard(
+		ActivateCardResponseView activateCard(
 				@PathVariable("idClient") int idClient, 
 				@PathVariable("idCard") int idCard) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Deactivate a card of a client")
 		@DeleteMapping("/{idCard}")
-		Boolean deactivateCard(
+		ActivateCardResponseView deactivateCard(
 				@PathVariable("idClient") int idClient, 
 				@PathVariable("idCard") int idCard) throws NotFoundException;
 		

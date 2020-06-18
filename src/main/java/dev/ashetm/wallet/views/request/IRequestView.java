@@ -1,4 +1,4 @@
-package dev.ashetm.wallet.views;
+package dev.ashetm.wallet.views.request;
 
 import java.time.LocalDate;
 
@@ -6,8 +6,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(
-		description = "Response that contain card information")
-public interface ResponseView {
+		description = "Request that contain request body")
+public interface IRequestView {
 	
 	@ApiModelProperty(
 			name = "now", 
@@ -19,5 +19,5 @@ public interface ResponseView {
 			hidden = false, 
 			required = true)
 	LocalDate now = LocalDate.now();
-	
+
 }
