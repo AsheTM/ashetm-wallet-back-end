@@ -35,7 +35,7 @@ public class WalletRepositoryImpl implements WalletRepository {
 		FOREACH_CLIENT:
 		for(int i = 0; i < nbrClients; i++) {
 			Client client = Client.builder()
-					.id(i)
+					.id(i + 1)
 					.firstName("FirstName " + i)
 					.lastName("LastName " + i)
 					.build();
@@ -46,6 +46,7 @@ public class WalletRepositoryImpl implements WalletRepository {
 			FOREACH_CARD:
 			for(int j = 0; j < nbrCardPerClient; j++) {
 				Card card = Card.builder()
+						.id(j + 1)
 						.balance(BigDecimal.ZERO)
 						.password("1234")
 						.type(j % 2 == 0 ? CardType.VISA : CardType.MASTERCARD)
@@ -58,6 +59,7 @@ public class WalletRepositoryImpl implements WalletRepository {
 				for(int k = 0; k < nbrTransactionsPerCard; k++) {
 					BigDecimal amount = BigDecimal.valueOf(100_000);
 					Transaction transaction = Transaction.builder()
+							.id(k + 1)
 							.amount(amount)
 							.build();
 
