@@ -8,8 +8,8 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public enum CardType {
 	
-	VISA("VISA"), MASTERCARD("MASTERCARD");
-	
-	private String type;
+	VISA("VISA"), MASTERCARD("MASTERCARD"), UNKOWN(null);
+
+    private String type;
 
 }

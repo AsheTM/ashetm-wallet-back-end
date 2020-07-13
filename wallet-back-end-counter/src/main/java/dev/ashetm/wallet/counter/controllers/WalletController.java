@@ -23,7 +23,7 @@ public interface WalletController {
 			position = 0, 
 			hidden = false, 
 			description = "All endpoints that concern client")
-	@RequestMapping("/v1/api/client")
+	@RequestMapping("/api/v1/client")
 	interface ClientController {
 
 		@ApiOperation(
@@ -50,7 +50,7 @@ public interface WalletController {
 			position = 1, 
 			hidden = false, 
 			description = "All endpoints that concern card")
-	@RequestMapping("/v1/api/client/{idClient}/card")
+	@RequestMapping("/api/v1/client/{idClient}/card")
 	interface CardController {
 
 		@ApiOperation(
@@ -116,7 +116,7 @@ public interface WalletController {
 			position = 2, 
 			hidden = false, 
 			description = "All endpoints that concern transaction")
-	@RequestMapping("/v1/api/client/{idClient}/card/{idCard}/transaction")
+	@RequestMapping("/api/v1/client/{idClient}/card/{idCard}/transaction")
 	interface TransactionController {
 
 		@ApiOperation(
