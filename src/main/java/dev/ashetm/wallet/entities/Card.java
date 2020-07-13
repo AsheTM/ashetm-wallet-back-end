@@ -33,10 +33,11 @@ public class Card implements Serializable {
 	@Default
 	@Setter
 	private BigDecimal balance = BigDecimal.valueOf(0.0);
-	
+
+	@Default
 	@NotNull
 	@Setter
-	private CardType type;
+	private CardType type = CardType.UNKOWN;
 	
 	@NotEmpty
 	@Size(
