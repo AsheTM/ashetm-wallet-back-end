@@ -12,7 +12,7 @@
 	
 	<groupId>dev.ashetm.wallet</groupId>
 	<artifactId>Wallet</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>Wallet</name>
 	<description>Demo project for Spring Boot</description>
 	<packaging>jar</packaging>
