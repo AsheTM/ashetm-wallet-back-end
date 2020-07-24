@@ -13,15 +13,23 @@
 
     <groupId>dev.ashetm.wallet.configurations</groupId>
     <artifactId>wallet-back-end-configuration</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <name>Wallet Configurations</name>
-    <packaging>pom</packaging>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>3.0.3</version>
+                <configuration>
+                    <processTypes>
+                        <web>java -cp target/classes:target/dependency/* Main</web>
+                    </processTypes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
