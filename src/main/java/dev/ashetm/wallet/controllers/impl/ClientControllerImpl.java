@@ -1,7 +1,8 @@
-package dev.ashetm.wallet.controllers;
+package dev.ashetm.wallet.controllers.impl;
 
 import java.util.List;
 
+import dev.ashetm.wallet.controllers.WalletController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
