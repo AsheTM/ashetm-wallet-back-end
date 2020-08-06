@@ -2,6 +2,7 @@ package dev.ashetm.wallet.repositories;
 
 import java.util.List;
 
+import dev.ashetm.wallet.repositories.impl.TransactionRepository;
 import org.springframework.stereotype.Repository;
 
 import dev.ashetm.wallet.entities.Card;

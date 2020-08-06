@@ -1,4 +1,4 @@
-package dev.ashetm.wallet.repositories;
+package dev.ashetm.wallet.repositories.impl;
 
 import java.util.List;
 

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.exceptions.NotFoundException;
-import dev.ashetm.wallet.repositories.CardRepository;
+import dev.ashetm.wallet.repositories.impl.CardRepository;
 
 @Service
 public class CardServiceImpl implements CardService {

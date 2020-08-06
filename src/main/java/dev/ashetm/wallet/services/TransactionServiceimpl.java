@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dev.ashetm.wallet.entities.Transaction;
 import dev.ashetm.wallet.exceptions.NotFoundException;
-import dev.ashetm.wallet.repositories.TransactionRepository;
+import dev.ashetm.wallet.repositories.impl.TransactionRepository;
 
 @Service
 public class TransactionServiceimpl implements TransactionService {

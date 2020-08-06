@@ -4,14 +4,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.ashetm.wallet.repositories.impl.WalletRepository;
 import org.springframework.stereotype.Component;
 
 import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.entities.Transaction;
 import dev.ashetm.wallet.enums.CardType;
-import dev.ashetm.wallet.exceptions.ClientNotFoundException;
-import dev.ashetm.wallet.exceptions.NotFoundException;
 
 @SuppressWarnings("unused")
 @Component

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.exceptions.NotFoundException;
-import dev.ashetm.wallet.repositories.ClientRepository;
+import dev.ashetm.wallet.repositories.impl.ClientRepository;
 
 @Service
 public class ClientServiceImpl implements ClientService {
