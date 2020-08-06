@@ -1,7 +1,8 @@
-package dev.ashetm.wallet.processes;
+package dev.ashetm.wallet.processes.impl;
 
 import java.math.BigDecimal;
 
+import dev.ashetm.wallet.processes.WalletProcess;
 import org.springframework.stereotype.Component;
 
 import dev.ashetm.wallet.entities.Card;
