@@ -1,7 +1,8 @@
-package dev.ashetm.wallet.services;
+package dev.ashetm.wallet.services.impl;
 
 import java.util.List;
 
+import dev.ashetm.wallet.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
