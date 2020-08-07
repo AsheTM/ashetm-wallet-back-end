@@ -3,6 +3,7 @@ package dev.ashetm.wallet.controllers.impl;
 import java.util.List;
 
 import dev.ashetm.wallet.controllers.WalletController;
+import dev.ashetm.wallet.views.request.TransactionRequestView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.entities.Transaction;
 import dev.ashetm.wallet.exceptions.NotFoundException;
-import dev.ashetm.wallet.processes.CardProcess;
 import dev.ashetm.wallet.processes.WalletProcess;
 import dev.ashetm.wallet.services.CardService;
 import dev.ashetm.wallet.views.request.AuthenticateCardRequestView;
@@ -27,15 +27,12 @@ import dev.ashetm.wallet.views.response.CardsResponseView;
 public class CardControllerImpl implements WalletController.CardController {
 	
 	private CardService cardService;
-	private CardProcess cardProcess;
 	private WalletProcess walletProcess;
 	
 	@Autowired
-	public CardControllerImpl(CardService cardService, 
-			CardProcess cardProcess, 
+	public CardControllerImpl(CardService cardService,
 			WalletProcess walletProcess) {
 		this.cardService = cardService;
-		this.cardProcess = cardProcess;
 		this.walletProcess = walletProcess;
 	}
 
