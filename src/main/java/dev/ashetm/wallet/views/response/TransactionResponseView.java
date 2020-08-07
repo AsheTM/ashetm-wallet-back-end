@@ -23,12 +23,7 @@ public class TransactionResponseView implements IResponseView {
 	private Transaction transaction;
 
 	public TransactionResponseView(Transaction transaction) {
-		super();
 		this.transaction = transaction;
-	}
-	
-	public static Transaction to(TransactionResponseView transactionResponseView) {
-		return transactionResponseView.getTransaction();
 	}
 	
 	public static TransactionResponseView from(Transaction transaction) {

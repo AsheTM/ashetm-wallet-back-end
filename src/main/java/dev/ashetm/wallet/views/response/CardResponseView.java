@@ -23,12 +23,7 @@ public class CardResponseView implements IResponseView {
 	private Card card;
 
 	public CardResponseView(Card card) {
-//		super();
 		this.card = card;
-	}
-	
-	public static Card to(CardResponseView accountResponseView) {
-		return accountResponseView.getCard();
 	}
 	
 	public static CardResponseView from(Card card) {

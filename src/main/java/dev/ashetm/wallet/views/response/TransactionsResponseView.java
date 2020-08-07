@@ -25,12 +25,7 @@ public class TransactionsResponseView implements IResponseView {
 	private List<Transaction> transactions;
 
 	public TransactionsResponseView(List<Transaction> transactions) {
-		super();
 		this.transactions = transactions;
-	}
-	
-	public static List<Transaction> to(TransactionsResponseView transactionsResponseView) {
-		return transactionsResponseView.getTransactions();
 	}
 	
 	public static TransactionsResponseView from(List<Transaction> transaction) {

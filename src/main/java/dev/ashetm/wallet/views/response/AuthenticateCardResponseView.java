@@ -13,10 +13,6 @@ public class AuthenticateCardResponseView implements IResponseView {
 		this.authenticate = authenticate;
 	}
 	
-	public static boolean to(AuthenticateCardResponseView authenticateCardResponseView) {
-		return authenticateCardResponseView.isAuthenticate();
-	}
-	
 	public static AuthenticateCardResponseView from(boolean authenticate) {
 		return new AuthenticateCardResponseView(authenticate);
 	}

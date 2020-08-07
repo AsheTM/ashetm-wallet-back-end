@@ -25,12 +25,7 @@ public class CardsResponseView implements IResponseView {
 	private List<Card> cards;
 
 	public CardsResponseView(List<Card> cards) {
-		super();
 		this.cards = cards;
-	}
-	
-	public static List<Card> to(CardsResponseView cardsResponseView) {
-		return cardsResponseView.getCards();
 	}
 	
 	public static CardsResponseView from(List<Card> cards) {

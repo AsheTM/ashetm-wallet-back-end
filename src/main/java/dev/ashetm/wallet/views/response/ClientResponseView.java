@@ -23,12 +23,7 @@ public class ClientResponseView implements IResponseView {
 	private Client client;
 
 	public ClientResponseView(Client client) {
-		super();
 		this.client = client;
-	}
-
-	public static Client to(ClientResponseView clientResponseView) {
-		return clientResponseView.getClient();
 	}
 	
 	public static ClientResponseView from(Client client) {

@@ -25,12 +25,7 @@ public class ClientsResponseView implements IResponseView {
 	private List<Client> clients;
 
 	public ClientsResponseView(List<Client> clients) {
-		super();
 		this.clients = clients;
-	}
-	
-	public static List<Client> to(ClientsResponseView clientsResponseView) {
-		return clientsResponseView.getClients();
 	}
 	
 	public static ClientsResponseView from(List<Client> clients) {

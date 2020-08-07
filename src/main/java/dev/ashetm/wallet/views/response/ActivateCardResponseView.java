@@ -13,10 +13,6 @@ public class ActivateCardResponseView implements IResponseView {
 		this.activate = activate;
 	}
 	
-	public static boolean to(ActivateCardResponseView activateCardResponseView) {
-		return activateCardResponseView.isActivate();
-	}
-	
 	public static ActivateCardResponseView from(boolean activate) {
 		return new ActivateCardResponseView(activate);
 	}
