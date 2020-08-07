@@ -6,9 +6,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public enum CardType {
+public enum CardTypeEnum {
 	
-	VISA("VISA"), MASTERCARD("MASTERCARD"), UNKOWN(null);
+	VISA("VISA"), MASTERCARD("MASTERCARD"), UNKNOWN(null);
 
     private String type;
 

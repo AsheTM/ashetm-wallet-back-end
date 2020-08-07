@@ -4,17 +4,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.ashetm.wallet.repositories.impl.WalletRepository;
 import org.springframework.stereotype.Component;
 
 import dev.ashetm.wallet.entities.Card;
 import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.entities.Transaction;
-import dev.ashetm.wallet.enums.CardType;
+import dev.ashetm.wallet.enums.CardTypeEnum;
 
 @SuppressWarnings("unused")
 @Component
-public class WalletRepositoryImpl implements WalletRepository {
+public class WalletRepositoryImpl {
 	
 	private final static int 
 			nbrClients = 2, 
@@ -48,7 +47,7 @@ public class WalletRepositoryImpl implements WalletRepository {
 						.id(j + 1)
 						.balance(BigDecimal.ZERO)
 						.password("1234")
-						.type(j % 2 == 0 ? CardType.VISA : CardType.MASTERCARD)
+						.type(j % 2 == 0 ? CardTypeEnum.VISA : CardTypeEnum.MASTERCARD)
 						.build();
 				List<Transaction> transactions = new ArrayList<>();
 

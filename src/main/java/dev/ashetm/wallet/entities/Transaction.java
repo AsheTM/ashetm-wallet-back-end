@@ -4,37 +4,34 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.persistence.*;
+
+@Table
+@Entity
 @ApiIgnore
 @Getter
+@Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class Transaction implements Serializable {
-	
-	private static int counter = 0;
-	
-	{ counter++; }
-	
-	private int id = -1;
-	
-	@Setter
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
+
+	@Builder.Default
 	private BigDecimal amount = BigDecimal.ZERO;
-	
+
+	@Builder.Default
 	private LocalDate date = LocalDate.now();
 
-	public Transaction() {
-		this.id = counter;
-	}
-
-	public Transaction(BigDecimal amount) {
-		this.id = counter;
-		this.amount = amount;
-	}
+	@JsonBackReference
+	private Card card;
 	
 	@Override
 	public String toString() {

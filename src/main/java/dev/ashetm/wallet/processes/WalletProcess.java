@@ -9,7 +9,6 @@ import dev.ashetm.wallet.entities.Transaction;
 public interface WalletProcess {
 	
 	Card withdraw(Card card, Transaction transaction);
-	
 	Card deposit(Card card, Transaction transaction);
 
 }

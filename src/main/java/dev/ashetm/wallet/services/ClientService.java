@@ -7,9 +7,7 @@ import dev.ashetm.wallet.entities.Client;
 public interface ClientService {
 	
 	Client getClient(int idClient);
-	
 	List<Client> getAllClient();
-	
 	Client saveClient(Client client);
 
 }

@@ -8,7 +8,6 @@ import dev.ashetm.wallet.exceptions.NotFoundException;
 public interface TransactionService {
 	
 	Transaction getTransaction(int idClient, int idAccount, int idTransaction) throws NotFoundException;
-	
 	List<Transaction> getAllTransaction(int idClient, int idAccount) throws NotFoundException;
 
 }

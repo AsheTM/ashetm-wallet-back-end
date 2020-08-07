@@ -2,13 +2,14 @@ package dev.ashetm.wallet.services.impl;
 
 import java.util.List;
 
+import dev.ashetm.wallet.exceptions.ClientNotFoundException;
 import dev.ashetm.wallet.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.exceptions.NotFoundException;
-import dev.ashetm.wallet.repositories.impl.ClientRepository;
+import dev.ashetm.wallet.repositories.ClientRepository;
 
 @Service
 public class ClientServiceImpl implements ClientService {
@@ -20,7 +21,8 @@ public class ClientServiceImpl implements ClientService {
 	public Client getClient(int idClient) {
 		Client client = null;
 		try {
-			client = clientRepository.find(idClient);
+			client = clientRepository.findById(idClient)
+					.orElseThrow(() -> new ClientNotFoundException());
 		} catch (NotFoundException e) {
 			e.printStackTrace();
 		}

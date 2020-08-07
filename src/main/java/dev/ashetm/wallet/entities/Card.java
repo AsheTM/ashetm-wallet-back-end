@@ -6,87 +6,63 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import dev.ashetm.wallet.enums.CardType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Builder.Default;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import dev.ashetm.wallet.enums.CardTypeEnum;
+import lombok.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+@Table
+@Entity
 @ApiIgnore
 @Getter
+@Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
 public class Card implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id;
 	
-	private static int counter = 0;
-	
-	{ counter++; }
-	
-	private int id = -1;
-	
-	@Default
-	@Setter
+	@Builder.Default
 	private BigDecimal balance = BigDecimal.valueOf(0.0);
 
-	@Default
-	@NotNull
-	@Setter
-	private CardType type = CardType.UNKOWN;
+	@Builder.Default
+	private CardTypeEnum type = CardTypeEnum.UNKNOWN;
 	
 	@NotEmpty
 	@Size(
 			min = 4, 
 			max = 4, 
 			message = "Password must be 4 digits")
-	@Setter
+	@NotNull
 	private String password;
 	
-	@Default
-	@Setter
+	@Builder.Default
 	private boolean isActivate = false;
-	
-	private List<Transaction> transactions = new ArrayList<>();
-	
-	@Default
+
+	@Builder.Default
 	private LocalDate date = LocalDate.now();
 
-	public Card() {
-		this.id = counter;
-	}
+	@OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+	@Builder.Default
+	private List<Transaction> transactions = new ArrayList<>();
 
-	public Card(BigDecimal balance, CardType type) {
-		this.id = counter;
-		this.balance = balance;
-		this.type = type;
-	}
+	@JsonBackReference
+	private Client client;
 
-	public Card(BigDecimal balance, CardType type, List<Transaction> transactions) {
-		this.id = counter;
-		this.balance = balance;
-		this.type = type;
-		this.transactions = transactions;
-	}
-
-	public Card(BigDecimal balance, CardType type, boolean isActivate, List<Transaction> transactions) {
-		this.id = counter;
-		this.balance = balance;
-		this.type = type;
-		this.isActivate = isActivate;
-		this.transactions = transactions;
-	}
-
-	public void setTransactions(List<Transaction> transactions) {
-		this.transactions = transactions;
-		for(Transaction transaction: transactions) {
-			this.balance.add(transaction.getAmount());
-		}
-	}
+//	public void setTransactions(List<Transaction> transactions) {
+//		this.transactions = transactions;
+//		for(Transaction transaction: transactions) {
+//			this.balance.add(transaction.getAmount());
+//		}
+//	}
 
 //	public void setTransactions(Transaction... transactions) {
 //		for(Transaction transaction: transactions) {
