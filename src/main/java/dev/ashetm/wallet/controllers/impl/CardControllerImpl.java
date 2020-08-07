@@ -76,35 +76,4 @@ public class CardControllerImpl implements WalletController.CardController {
 		return CardResponseView.from(card);
 	}
 
-	@Override
-	public CardResponseView addCard(int idClient, Card card) throws NotFoundException {
-		card = this.cardService.saveCard(idClient, card);
-		
-		return CardResponseView.from(card);
-	}
-
-	@Override
-	public ActivateCardResponseView activateCard(int idClient, int idCard) throws NotFoundException {
-		Card account = this.cardService.getCard(idClient, idCard);
-		Boolean result = null;
-		if(account != null) {
-			account = this.cardProcess.activateAccount(account);
-			result = Boolean.valueOf(account.isActivate());
-		}
-		
-		return ActivateCardResponseView.from(result);
-	}
-
-	@Override
-	public ActivateCardResponseView deactivateCard(int idClient, int idCard) throws NotFoundException {
-		Card card = this.cardService.getCard(idClient, idCard);
-		Boolean result = null;
-		if(card != null) {
-			card = this.cardProcess.deactivateAccount(card);
-			result = Boolean.valueOf(card.isActivate());
-		}
-		
-		return ActivateCardResponseView.from(result);
-	}
-
 }

@@ -102,20 +102,6 @@ public interface WalletController {
 				@PathVariable("idCard") int idCard, 
 				@RequestBody Transaction transaction) throws NotFoundException;
 
-		@ApiOperation(
-				value = "Activate a card of a client")
-		@PatchMapping("/{idCard}")
-		ActivateCardResponseView activateCard(
-				@PathVariable("idClient") int idClient, 
-				@PathVariable("idCard") int idCard) throws NotFoundException;
-
-		@ApiOperation(
-				value = "Deactivate a card of a client")
-		@DeleteMapping("/{idCard}")
-		ActivateCardResponseView deactivateCard(
-				@PathVariable("idClient") int idClient, 
-				@PathVariable("idCard") int idCard) throws NotFoundException;
-		
 	}
 
 
