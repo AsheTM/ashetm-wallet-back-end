@@ -14,7 +14,6 @@ import dev.ashetm.wallet.exceptions.NotFoundException;
 import dev.ashetm.wallet.processes.WalletProcess;
 import dev.ashetm.wallet.services.CardService;
 import dev.ashetm.wallet.views.request.AuthenticateCardRequestView;
-import dev.ashetm.wallet.views.response.ActivateCardResponseView;
 import dev.ashetm.wallet.views.response.AuthenticateCardResponseView;
 import dev.ashetm.wallet.views.response.CardResponseView;
 import dev.ashetm.wallet.views.response.CardsResponseView;
@@ -49,9 +48,18 @@ public class CardControllerImpl implements WalletController.CardController {
 		
 		return CardResponseView.from(card);
 	}
+
+	@Override
+	public CardResponseView addCard(int idClient, Card card) throws NotFoundException {
+		card = this.cardService.saveCard(idClient, card);
+
+		return CardResponseView.from(card);
+	}
 	
 	@Override
-	public AuthenticateCardResponseView authenticate(int idClient, int idCard, AuthenticateCardRequestView authenticateCardRequestView) throws NotFoundException {
+	public AuthenticateCardResponseView authenticate(int idClient, int idCard,
+													 AuthenticateCardRequestView authenticateCardRequestView)
+			throws NotFoundException {
 		String password = authenticateCardRequestView.getPassword();
 		boolean authenticate = this.cardService.authenticate(idClient, idCard, password);
 		
@@ -59,8 +67,10 @@ public class CardControllerImpl implements WalletController.CardController {
 	}
 
 	@Override
-	public CardResponseView withdraw(int idClient, int idCard, Transaction transaction) 
-			throws NotFoundException {
+	public CardResponseView withdraw(int idClient, int idCard,
+									 TransactionRequestView transactionRequestView) throws NotFoundException {
+		Transaction transaction = TransactionRequestView.to(transactionRequestView);
+
 		Card card = this.cardService.getCard(idClient, idCard);
 		card = this.walletProcess.withdraw(card, transaction);
 		
@@ -68,8 +78,10 @@ public class CardControllerImpl implements WalletController.CardController {
 	}
 
 	@Override
-	public CardResponseView deposit(int idClient, int idCard, Transaction transaction) 
+	public CardResponseView deposit(int idClient, int idCard, TransactionRequestView transactionRequestView)
 			throws NotFoundException {
+		Transaction transaction = TransactionRequestView.to(transactionRequestView);
+
 		Card card = this.cardService.getCard(idClient, idCard);
 		card = this.walletProcess.deposit(card, transaction);
 		

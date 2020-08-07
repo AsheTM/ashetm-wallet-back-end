@@ -43,9 +43,6 @@ public class Card implements Serializable {
 			message = "Password must be 4 digits")
 	@NotNull
 	private String password;
-	
-	@Builder.Default
-	private boolean isActivate = false;
 
 	@Builder.Default
 	private LocalDate date = LocalDate.now();

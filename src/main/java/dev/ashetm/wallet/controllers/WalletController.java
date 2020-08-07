@@ -1,5 +1,6 @@
 package dev.ashetm.wallet.controllers;
 
+import dev.ashetm.wallet.views.request.TransactionRequestView;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -92,7 +93,7 @@ public interface WalletController {
 		CardResponseView withdraw(
 				@PathVariable("idClient") int idClient, 
 				@PathVariable("idCard") int idCard, 
-				@RequestBody Transaction transaction) throws NotFoundException;
+				@RequestBody TransactionRequestView transactionRequestView) throws NotFoundException;
 
 		@ApiOperation(
 				value = "Make a deposit transaction in a card for a client")
@@ -100,7 +101,7 @@ public interface WalletController {
 		CardResponseView deposit(
 				@PathVariable("idClient") int idClient, 
 				@PathVariable("idCard") int idCard, 
-				@RequestBody Transaction transaction) throws NotFoundException;
+				@RequestBody TransactionRequestView transactionRequestView) throws NotFoundException;
 
 	}
 
