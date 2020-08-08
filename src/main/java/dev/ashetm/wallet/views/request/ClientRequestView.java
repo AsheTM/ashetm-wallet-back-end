@@ -14,7 +14,7 @@ import java.util.ArrayList;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientRequestView {
+public class ClientRequestView implements IRequestView {
 
     private String firstName;
     private String lastName;

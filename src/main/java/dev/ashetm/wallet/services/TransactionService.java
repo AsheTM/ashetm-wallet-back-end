@@ -4,10 +4,11 @@ import java.util.List;
 
 import dev.ashetm.wallet.entities.Transaction;
 import dev.ashetm.wallet.exceptions.NotFoundException;
+import dev.ashetm.wallet.exceptions.TransactionNotFoundException;
 
 public interface TransactionService {
 	
-	Transaction getTransaction(int idClient, int idAccount, int idTransaction) throws NotFoundException;
-	List<Transaction> getAllTransaction(int idClient, int idAccount) throws NotFoundException;
+	Transaction getTransaction(int idClient, int idAccount, int idTransaction) throws TransactionNotFoundException;
+	List<Transaction> getAllTransaction(int idClient, int idAccount);
 
 }

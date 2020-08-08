@@ -18,21 +18,15 @@ public class TransactionServiceimpl implements TransactionService {
 	TransactionRepository transactionRepository;
 
 	@Override
-	public Transaction getTransaction(int idClient, int idCard, int idTransaction) {
-		Transaction transaction = null;
-		try {
-			transaction = transactionRepository.findTransaction(idClient, idCard, idTransaction)
-						.orElseThrow(() -> new TransactionNotFoundException());
-		} catch (NotFoundException e) {
-			e.printStackTrace();
-		}
-		return transaction;
+	public Transaction getTransaction(int idClient, int idCard,
+									  int idTransaction) throws TransactionNotFoundException {
+		return transactionRepository.findTransaction(idClient, idCard, idTransaction)
+				.orElseThrow(() -> new TransactionNotFoundException());
 	}
 
 	@Override
 	public List<Transaction> getAllTransaction(int idClient, int idAccount) {
-		List<Transaction> transactions = transactionRepository.findAllTransactions(idClient, idAccount);
-		return transactions;
+		return transactionRepository.findAllTransactions(idClient, idAccount);
 	}
 
 }

@@ -18,15 +18,9 @@ public class ClientServiceImpl implements ClientService {
 	ClientRepository clientRepository;
 
 	@Override
-	public Client getClient(int idClient) {
-		Client client = null;
-		try {
-			client = clientRepository.findById(idClient)
-					.orElseThrow(() -> new ClientNotFoundException());
-		} catch (NotFoundException e) {
-			e.printStackTrace();
-		}
-		return client;
+	public Client getClient(int idClient) throws ClientNotFoundException {
+		return clientRepository.findById(idClient)
+				.orElseThrow(() -> new ClientNotFoundException());
 	}
 
 	@Override

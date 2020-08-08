@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TransactionRequestView {
+public class TransactionRequestView implements IRequestView {
 
     @NotNull
     private BigDecimal amount;

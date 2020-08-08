@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CardRequestView {
+public class CardRequestView implements IRequestView {
 
     @NotEmpty
     @Size(

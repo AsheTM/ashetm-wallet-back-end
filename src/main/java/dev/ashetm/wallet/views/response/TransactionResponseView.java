@@ -4,10 +4,13 @@ import dev.ashetm.wallet.entities.Transaction;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class TransactionResponseView implements IResponseView {
 
 	@ApiModelProperty(
@@ -19,12 +22,7 @@ public class TransactionResponseView implements IResponseView {
 			position = 0, 
 			hidden = false, 
 			required = true)
-	@Setter
 	private Transaction transaction;
-
-	public TransactionResponseView(Transaction transaction) {
-		this.transaction = transaction;
-	}
 	
 	public static TransactionResponseView from(Transaction transaction) {
 		return new TransactionResponseView(transaction);

@@ -18,41 +18,21 @@ public class CardServiceImpl implements CardService {
 	CardRepository cardRepository;
 	
 	@Override
-	public Card getCard(int idClient, int idCard) {
-		Card card = null;
-		try {
-			card = cardRepository.findCard(idClient, idCard)
-					.orElseThrow(() -> new CardNotFoundException());
-		} catch (NotFoundException e) {
-			e.printStackTrace();
-		}
-		return card;
+	public Card getCard(int idClient, int idCard) throws CardNotFoundException {
+		return cardRepository.findCard(idClient, idCard)
+				.orElseThrow(() -> new CardNotFoundException());
 	}
-	
+
 	@Override
 	public List<Card> getAllCards(int idClient) {
-		List<Card> cards = cardRepository.findAllCards(idClient);
-		return cards;
+		return cardRepository.findAllCards(idClient);
 	}
 	
 	@Override
 	public Card saveCard(int idClient, Card card) {
-//		try {
-//			this.cardRepository.save(idClient, card);
-			this.cardRepository.save(card);
-//		} catch(NotFoundException e) {
-//			card = null;
-//			e.printStackTrace();
-//		}
-		return card;
-	}
+		this.cardRepository.save(card);
 
-	@Override
-	public boolean authenticate(int idClient, int idCard, String password) {
-		Card card = this.getCard(idClient, idCard);
-		
-		return card.getPassword()
-				.equals(password);
+		return card;
 	}
 
 }

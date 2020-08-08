@@ -6,10 +6,13 @@ import dev.ashetm.wallet.entities.Client;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ClientsResponseView implements IResponseView {
 
 	@ApiModelProperty(
@@ -21,12 +24,7 @@ public class ClientsResponseView implements IResponseView {
 			position = 0, 
 			hidden = false, 
 			required = true)
-	@Setter
 	private List<Client> clients;
-
-	public ClientsResponseView(List<Client> clients) {
-		this.clients = clients;
-	}
 	
 	public static ClientsResponseView from(List<Client> clients) {
 		return new ClientsResponseView(clients);
