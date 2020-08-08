@@ -7,6 +7,8 @@ import dev.ashetm.wallet.exceptions.ClientNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,30 +35,34 @@ public class ClientControllerImpl implements WalletController.ClientController {
 	}
 
 	@Override
-	public ClientsResponseView showClients() {
+	public ResponseEntity<ClientsResponseView> showClients() {
 		List<Client> clients = this.clientService.getAllClient();
 		
-		return ClientsResponseView.from(clients);
+		return ResponseEntity.ok(ClientsResponseView.from(clients));
 	}
 
 	@Override
-	public ClientResponseView showClient(int idClient) {
+	public ResponseEntity<ClientResponseView> showClient(int idClient) {
 		Client client = null;
+		HttpStatus httpStatus = HttpStatus.OK;
 
 		try {
 			client = this.clientService.getClient(idClient);
 		} catch (ClientNotFoundException clientNotFoundException) {
 			LOGGER.error(clientNotFoundException.getMessage());
+			httpStatus = HttpStatus.NOT_FOUND;
 		}
 		
-		return ClientResponseView.from(client);
+		return ResponseEntity
+				.status(httpStatus)
+				.body(ClientResponseView.from(client));
 	}
 
 	@Override
-	public ClientResponseView addClient(Client client) {
+	public ResponseEntity<ClientResponseView> addClient(Client client) {
 		client = this.clientService.saveClient(client);
-		
-		return ClientResponseView.from(client);
+
+		return ResponseEntity.ok(ClientResponseView.from(client));
 	}
 	
 }

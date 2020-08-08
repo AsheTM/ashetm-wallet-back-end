@@ -2,6 +2,7 @@ package dev.ashetm.wallet.controllers;
 
 import dev.ashetm.wallet.views.request.TransactionRequestView;
 import dev.ashetm.wallet.views.response.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,17 +28,17 @@ public interface WalletController {
 		@ApiOperation(
 				value = "Get one client")
 		@GetMapping("/{idClient}")
-		ClientResponseView showClient(@PathVariable("idClient") int idClient);
+		ResponseEntity<ClientResponseView> showClient(@PathVariable("idClient") int idClient);
 
 		@ApiOperation(
 				value = "Get all clients")
 		@GetMapping("")
-		ClientsResponseView showClients();
+		ResponseEntity<ClientsResponseView> showClients();
 
 		@ApiOperation(
 				value = "Save a client")
 		@PostMapping("")
-		ClientResponseView addClient(@RequestBody Client client);
+		ResponseEntity<ClientResponseView> addClient(@RequestBody Client client);
 		
 	}
 
@@ -52,24 +53,24 @@ public interface WalletController {
 		@ApiOperation(
 				value = "Get one card from a client")
 		@GetMapping("/{idCard}")
-		CardResponseView showCard(
+		ResponseEntity<CardResponseView> showCard(
 				@PathVariable("idClient") int idClient,
 				@PathVariable("idCard") int idCard);
 
 		@ApiOperation(
 				value = "Get all cards from a client")
 		@GetMapping()
-		CardsResponseView showCards(@PathVariable("idClient") int idClient);
+		ResponseEntity<CardsResponseView> showCards(@PathVariable("idClient") int idClient);
 
 		@ApiOperation(
 				value = "Save a card to a client")
 		@PostMapping()
-		CardResponseView addCard(
+		ResponseEntity<CardResponseView> addCard(
 				@PathVariable("idClient") int idClient, 
 				@RequestBody Card card);
 		
 		@PostMapping("/{idCard}/authenticate")
-		AuthenticateCardResponseView authenticate(
+		ResponseEntity<AuthenticateCardResponseView> authenticate(
 				@PathVariable("idClient") int idClient, 
 				@PathVariable("idCard") int idCard, 
 				@RequestBody AuthenticateCardRequestView authenticateCardRequestView);
@@ -87,7 +88,7 @@ public interface WalletController {
 		@ApiOperation(
 				value = "Get one transaction of a card of a client")
 		@GetMapping("/{idTransaction}")
-		TransactionResponseView showTransaction(
+		ResponseEntity<TransactionResponseView> showTransaction(
 				@PathVariable("idClient") int idClient,
 				@PathVariable("idCard") int idCard,
 				@PathVariable("idTransaction") int idTransaction);
@@ -95,14 +96,14 @@ public interface WalletController {
 		@ApiOperation(
 				value = "Get all transactions of a card of a client")
 		@GetMapping()
-		TransactionsResponseView showTransactions(
+		ResponseEntity<TransactionsResponseView> showTransactions(
 				@PathVariable("idClient") int idClient, 
 				@PathVariable("idCard") int idCard);
 
 		@ApiOperation(
 				value = "Make a withdraw/deposit transaction in a card for a client")
 		@PostMapping("/{idCard}")
-		BalanceCardResponseView makeTransaction(
+		ResponseEntity<BalanceCardResponseView> makeTransaction(
 				@PathVariable("idClient") int idClient,
 				@PathVariable("idCard") int idCard,
 				@RequestBody TransactionRequestView transactionRequestView);

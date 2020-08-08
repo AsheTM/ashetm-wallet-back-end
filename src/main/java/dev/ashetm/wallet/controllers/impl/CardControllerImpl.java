@@ -8,6 +8,8 @@ import dev.ashetm.wallet.processes.CardProcess;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,45 +41,53 @@ public class CardControllerImpl implements WalletController.CardController {
 	}
 
 	@Override
-	public CardResponseView showCard(int idClient, int idCard) {
+	public ResponseEntity<CardResponseView> showCard(int idClient, int idCard) {
 		Card card = null;
+		HttpStatus httpStatus = HttpStatus.OK;
 
 		try{
 			card = this.cardService.getCard(idClient, idCard);
 		} catch (CardNotFoundException cardNotFoundException) {
 			LOGGER.error(cardNotFoundException.getMessage());
+			httpStatus = HttpStatus.NOT_FOUND;
 		}
 
-		return CardResponseView.from(card);
+		return ResponseEntity
+				.status(httpStatus)
+				.body(CardResponseView.from(card));
 	}
 
 	@Override
-	public CardsResponseView showCards(int idClient) {
+	public ResponseEntity<CardsResponseView> showCards(int idClient) {
 		List<Card> cards = this.cardService.getAllCards(idClient);
 		
-		return CardsResponseView.from(cards);
+		return ResponseEntity.ok(CardsResponseView.from(cards));
 	}
 
 	@Override
-	public CardResponseView addCard(int idClient, Card card) {
+	public ResponseEntity<CardResponseView> addCard(int idClient, Card card) {
 		card = this.cardService.saveCard(idClient, card);
 
-		return CardResponseView.from(card);
+		return ResponseEntity.ok(CardResponseView.from(card));
 	}
 
 	@Override
-	public AuthenticateCardResponseView authenticate(int idClient, int idCard,
+	public ResponseEntity<AuthenticateCardResponseView> authenticate(int idClient, int idCard,
 													 AuthenticateCardRequestView authenticateCardRequestView) {
-		String password = authenticateCardRequestView.getPassword();
 		Boolean authenticate = false;
+		HttpStatus httpStatus = HttpStatus.OK;
+		String password = authenticateCardRequestView.getPassword();
 
 		try {
 			authenticate = this.cardProcess.authenticate(idClient, idCard, password);
 		} catch(NotFoundException notFoundException) {
 			LOGGER.error(notFoundException.getMessage());
+			httpStatus = HttpStatus.NOT_FOUND;
 		}
 
-		return AuthenticateCardResponseView.from(authenticate);
+		return ResponseEntity
+				.status(httpStatus)
+				.body(AuthenticateCardResponseView.from(authenticate));
 	}
 
 }

@@ -12,6 +12,8 @@ import dev.ashetm.wallet.views.response.BalanceCardResponseView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,41 +43,49 @@ public class TransactionControllerImpl implements WalletController.TransactionCo
 	}
 	
 	@Override
-	public TransactionsResponseView showTransactions(int idClient, int idCard) {
+	public ResponseEntity<TransactionsResponseView> showTransactions(int idClient, int idCard) {
 		List<Transaction> transactions = this.transactionService.getAllTransaction(idClient, idCard);
-		
-		return TransactionsResponseView.from(transactions);
+
+		return ResponseEntity.ok(TransactionsResponseView.from(transactions));
 	}
 	
 	@Override
-	public TransactionResponseView showTransaction(int idClient, int idCard, int idTransaction) {
+	public ResponseEntity<TransactionResponseView> showTransaction(int idClient, int idCard, int idTransaction) {
+		HttpStatus httpStatus = HttpStatus.OK;
 		Transaction transaction = null;
 
 		try {
 			transaction = this.transactionService.getTransaction(idClient, idCard, idTransaction);
 		} catch(TransactionNotFoundException transactionNotFoundException) {
 			LOGGER.error(transactionNotFoundException.getMessage());
+			httpStatus = HttpStatus.NO_CONTENT;
 		}
 		
-		return TransactionResponseView.from(transaction);
+		return ResponseEntity
+				.status(httpStatus)
+				.body(TransactionResponseView.from(transaction));
 	}
 
 	@Override
-	public BalanceCardResponseView makeTransaction(int idClient, int idCard,
+	public ResponseEntity<BalanceCardResponseView> makeTransaction(int idClient, int idCard,
 												   TransactionRequestView transactionRequestView) {
-		Transaction transaction = TransactionRequestView.to(transactionRequestView);
-
 		Card card = null;
+		HttpStatus httpStatus = HttpStatus.OK;
+		Transaction transaction = TransactionRequestView.to(transactionRequestView);
 
 		try {
 			card = this.walletProcess.makeTransaction(idClient, idCard, transaction);
 		} catch(CardBalanceNotSufficientException cardBalanceNotSufficientException) {
 			LOGGER.error(cardBalanceNotSufficientException.getMessage());
+			httpStatus = HttpStatus.PRECONDITION_REQUIRED;
 		} catch(NotFoundException notFoundException) {
 			LOGGER.error(notFoundException.getMessage());
+			httpStatus = HttpStatus.NO_CONTENT;
 		}
 
-		return BalanceCardResponseView.from(card);
+		return ResponseEntity
+				.status(httpStatus)
+				.body(BalanceCardResponseView.from(card));
 	}
 
 }
