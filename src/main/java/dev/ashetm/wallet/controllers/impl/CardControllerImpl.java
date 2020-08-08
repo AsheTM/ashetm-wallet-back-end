@@ -51,7 +51,7 @@ public class CardControllerImpl implements WalletController.CardController {
 			card = this.cardService.getCard(idClient, idCard);
 		} catch (CardNotFoundException cardNotFoundException) {
 			LOGGER.error(cardNotFoundException.getMessage());
-			httpStatus = HttpStatus.NOT_FOUND;
+			httpStatus = HttpStatus.NO_CONTENT;
 		}
 
 		return ResponseEntity
@@ -76,7 +76,7 @@ public class CardControllerImpl implements WalletController.CardController {
 			cardSaved = this.cardProcess.saveCard(idClient, card);
 		} catch(NotFoundException notFoundException) {
 			LOGGER.error(notFoundException.getMessage());
-			httpStatus = HttpStatus.NOT_FOUND;
+			httpStatus = HttpStatus.NO_CONTENT;
 		} catch(PasswordCardInvalidFormatException passwordCardInvalidFormatException) {
 			LOGGER.error(passwordCardInvalidFormatException.getMessage());
 			httpStatus = HttpStatus.NOT_ACCEPTABLE;
@@ -98,7 +98,7 @@ public class CardControllerImpl implements WalletController.CardController {
 			authenticate = this.cardProcess.authenticate(idClient, idCard, password);
 		} catch(NotFoundException notFoundException) {
 			LOGGER.error(notFoundException.getMessage());
-			httpStatus = HttpStatus.NOT_FOUND;
+			httpStatus = HttpStatus.NO_CONTENT;
 		}
 
 		return ResponseEntity

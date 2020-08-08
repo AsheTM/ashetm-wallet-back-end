@@ -51,7 +51,7 @@ public class ClientControllerImpl implements WalletController.ClientController {
 			client = this.clientService.getClient(idClient);
 		} catch (ClientNotFoundException clientNotFoundException) {
 			LOGGER.error(clientNotFoundException.getMessage());
-			httpStatus = HttpStatus.NOT_FOUND;
+			httpStatus = HttpStatus.NO_CONTENT;
 		}
 		
 		return ResponseEntity

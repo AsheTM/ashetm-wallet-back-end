@@ -1,13 +1,9 @@
 package dev.ashetm.wallet.views.request;
 
 import dev.ashetm.wallet.entities.Card;
-import dev.ashetm.wallet.entities.Client;
 import dev.ashetm.wallet.enums.CardTypeEnum;
 import lombok.*;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
