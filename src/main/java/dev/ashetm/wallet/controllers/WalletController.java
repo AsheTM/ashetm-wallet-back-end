@@ -1,5 +1,7 @@
 package dev.ashetm.wallet.controllers;
 
+import dev.ashetm.wallet.views.request.CardRequestView;
+import dev.ashetm.wallet.views.request.ClientRequestView;
 import dev.ashetm.wallet.views.request.TransactionRequestView;
 import dev.ashetm.wallet.views.response.*;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +40,7 @@ public interface WalletController {
 		@ApiOperation(
 				value = "Save a client")
 		@PostMapping("")
-		ResponseEntity<ClientResponseView> addClient(@RequestBody Client client);
+		ResponseEntity<ClientResponseView> addClient(@RequestBody ClientRequestView clientRequestView);
 		
 	}
 
@@ -67,7 +69,7 @@ public interface WalletController {
 		@PostMapping()
 		ResponseEntity<CardResponseView> addCard(
 				@PathVariable("idClient") int idClient, 
-				@RequestBody Card card);
+				@RequestBody CardRequestView cardRequestView);
 		
 		@PostMapping("/{idCard}/authenticate")
 		ResponseEntity<AuthenticateCardResponseView> authenticate(
@@ -102,7 +104,7 @@ public interface WalletController {
 
 		@ApiOperation(
 				value = "Make a withdraw/deposit transaction in a card for a client")
-		@PostMapping("/{idCard}")
+		@PostMapping()
 		ResponseEntity<BalanceCardResponseView> makeTransaction(
 				@PathVariable("idClient") int idClient,
 				@PathVariable("idCard") int idCard,

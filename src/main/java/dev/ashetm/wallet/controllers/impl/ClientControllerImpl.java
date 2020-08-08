@@ -4,6 +4,7 @@ import java.util.List;
 
 import dev.ashetm.wallet.controllers.WalletController;
 import dev.ashetm.wallet.exceptions.ClientNotFoundException;
+import dev.ashetm.wallet.views.request.ClientRequestView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +60,11 @@ public class ClientControllerImpl implements WalletController.ClientController {
 	}
 
 	@Override
-	public ResponseEntity<ClientResponseView> addClient(Client client) {
-		client = this.clientService.saveClient(client);
+	public ResponseEntity<ClientResponseView> addClient(ClientRequestView clientRequestView) {
+		Client client = ClientRequestView.to(clientRequestView);
+		Client clientSaved = this.clientService.saveClient(client);
 
-		return ResponseEntity.ok(ClientResponseView.from(client));
+		return ResponseEntity.ok(ClientResponseView.from(clientSaved));
 	}
 	
 }

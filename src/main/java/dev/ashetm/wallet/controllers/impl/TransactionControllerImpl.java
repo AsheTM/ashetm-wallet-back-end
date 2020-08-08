@@ -4,9 +4,9 @@ import java.util.List;
 
 import dev.ashetm.wallet.controllers.WalletController;
 import dev.ashetm.wallet.entities.Card;
-import dev.ashetm.wallet.exceptions.CardBalanceNotSufficientException;
+import dev.ashetm.wallet.exceptions.BalanceCardNotSufficientException;
 import dev.ashetm.wallet.exceptions.TransactionNotFoundException;
-import dev.ashetm.wallet.processes.WalletProcess;
+import dev.ashetm.wallet.processes.TransactionProcess;
 import dev.ashetm.wallet.views.request.TransactionRequestView;
 import dev.ashetm.wallet.views.response.BalanceCardResponseView;
 import org.slf4j.Logger;
@@ -31,15 +31,15 @@ import dev.ashetm.wallet.views.response.TransactionsResponseView;
 public class TransactionControllerImpl implements WalletController.TransactionController {
 	
 	private TransactionService transactionService;
-	private WalletProcess walletProcess;
+	private TransactionProcess transactionProcess;
 
 	private final Logger LOGGER = LoggerFactory.getLogger(TransactionControllerImpl.class);
 	
 	@Autowired
 	public TransactionControllerImpl(TransactionService transactionService,
-									 WalletProcess walletProcess) {
+									 TransactionProcess transactionProcess) {
 		this.transactionService = transactionService;
-		this.walletProcess = walletProcess;
+		this.transactionProcess = transactionProcess;
 	}
 	
 	@Override
@@ -74,8 +74,8 @@ public class TransactionControllerImpl implements WalletController.TransactionCo
 		Transaction transaction = TransactionRequestView.to(transactionRequestView);
 
 		try {
-			card = this.walletProcess.makeTransaction(idClient, idCard, transaction);
-		} catch(CardBalanceNotSufficientException cardBalanceNotSufficientException) {
+			card = this.transactionProcess.makeTransaction(idClient, idCard, transaction);
+		} catch(BalanceCardNotSufficientException cardBalanceNotSufficientException) {
 			LOGGER.error(cardBalanceNotSufficientException.getMessage());
 			httpStatus = HttpStatus.PRECONDITION_REQUIRED;
 		} catch(NotFoundException notFoundException) {

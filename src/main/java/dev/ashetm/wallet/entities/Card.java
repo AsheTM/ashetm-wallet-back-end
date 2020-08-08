@@ -35,13 +35,7 @@ public class Card implements Serializable {
 
 	@Builder.Default
 	private CardTypeEnum type = CardTypeEnum.UNKNOWN;
-	
-	@NotEmpty
-	@Size(
-			min = 4, 
-			max = 4, 
-			message = "Password must be 4 digits")
-	@NotNull
+
 	private String password;
 
 	@Builder.Default
@@ -51,6 +45,7 @@ public class Card implements Serializable {
 	@Builder.Default
 	private List<Transaction> transactions = new ArrayList<>();
 
+	@ManyToOne
 	@JsonBackReference
 	private Client client;
 

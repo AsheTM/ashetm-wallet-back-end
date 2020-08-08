@@ -29,4 +29,9 @@ public class TransactionServiceimpl implements TransactionService {
 		return transactionRepository.findAllTransactions(idClient, idAccount);
 	}
 
+	@Override
+	public Transaction saveTransaction(Transaction transaction) {
+		return this.transactionRepository.save(transaction);
+	}
+
 }

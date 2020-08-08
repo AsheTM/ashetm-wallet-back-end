@@ -9,6 +9,6 @@ public interface CardService {
 	
 	Card getCard(int idClient, int idCard) throws CardNotFoundException;
 	List<Card> getAllCards(int idClient);
-	Card saveCard(int idClient, Card card);
+	Card saveCard(Card card);
 
 }

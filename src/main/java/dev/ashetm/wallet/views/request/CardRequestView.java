@@ -17,21 +17,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class CardRequestView implements IRequestView {
 
-    @NotEmpty
-    @Size(
-            min = 4,
-            max = 4,
-            message = "Password must be 4 digits")
-    @NotNull
     private String password;
-    private Client client;
+    private CardTypeEnum type;
 
     public static Card to(CardRequestView cardRequestView) {
         return Card.builder()
                 .balance(BigDecimal.ZERO)
-                .client(cardRequestView.getClient())
                 .password(cardRequestView.getPassword())
-                .type(CardTypeEnum.UNKNOWN)
+                .type(cardRequestView.getType())
                 .date(LocalDate.now())
                 .build();
     }

@@ -3,6 +3,7 @@ package dev.ashetm.wallet.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
@@ -28,8 +29,9 @@ public class Transaction implements Serializable {
 	private BigDecimal amount = BigDecimal.ZERO;
 
 	@Builder.Default
-	private LocalDate date = LocalDate.now();
+	private LocalDateTime date = LocalDateTime.now();
 
+	@ManyToOne
 	@JsonBackReference
 	private Card card;
 	
