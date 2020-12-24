@@ -1,0 +1,35 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+
+type Query {
+    account(id: String!): Account
+    accounts: [Account]
+
+    paymentGateways(id: String!): [PaymentGateway]
+}
+
+type Account {
+    id: String!
+    firstName: String
+    lastName: String
+}
+
+type PaymentGateway {
+    id: String!
+    type: Int!
+    username: String!
+}
+
+
+type Mutation {
+    addPaymentGateway(idAccount: String!, paymentGateway: PaymentGatewayInput!): PaymentGateway
+}
+
+input PaymentGatewayInput {
+    id: String!
+    type: Int!
+    username: String!
+}

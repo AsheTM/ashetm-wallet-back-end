@@ -12,11 +12,30 @@
 	</parent>
 	
 	<groupId>dev.ashetm.wallet</groupId>
-	<artifactId>Wallet</artifactId>
+	<artifactId>ashetm-wallet-back-end</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>Wallet</name>
+	<name>AsheTM Wallet</name>
 	<description>Demo project for Spring Boot</description>
 	<packaging>pom</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>src/main/java/dev/ashetm/wallet/WalletApplication.java</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<contributors>
+		<contributor>
+			<name>DAWOUD Haitham</name>
+			<email>contact@ashetm.com</email>
+		</contributor>
+	</contributors>
 
 	<dependencies>
 		<dependency>
@@ -32,14 +51,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
-		<dependency>
-		    <groupId>org.projectlombok</groupId>
-		    <artifactId>lombok</artifactId>
-		    <version>1.18.8</version>
-		    <scope>provided</scope>
 		</dependency>
 		
 		<dependency>
@@ -62,11 +73,48 @@
 		    <artifactId>springfox-bean-validators</artifactId>
 		    <version>2.9.2</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.8</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.graphql-java</groupId>
+			<artifactId>graphql-spring-boot-starter</artifactId>
+			<version>5.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.graphql-java</groupId>
+			<artifactId>graphql-java-tools</artifactId>
+			<version>5.2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.5.1</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<modules>
-		<module>wallet-back-end-configuration</module>
-		<module>wallet-back-end-counter</module>
+		<module>ashetm-wallet-back-end-account</module>
+		<module>ashetm-wallet-back-end-common</module>
+		<module>ashetm-wallet-back-end-payment</module>
+		<module>ashetm-wallet-back-end-payment-method</module>
+		<module>ashetm-wallet-back-end-payment-stripe</module>
+		<module>ashetm-wallet-back-end-payment-paypal</module>
+		<module>ashetm-wallet-back-end-payment-hedera</module>
 	</modules>
 
 	<properties>
