@@ -111,7 +111,7 @@
 		<module>ashetm-wallet-back-end-account</module>
 		<module>ashetm-wallet-back-end-common</module>
 		<module>ashetm-wallet-back-end-payment</module>
-		<module>ashetm-wallet-back-end-payment-method</module>
+<!--		<module>ashetm-wallet-back-end-payment-method</module>-->
 		<module>ashetm-wallet-back-end-payment-stripe</module>
 		<module>ashetm-wallet-back-end-payment-paypal</module>
 		<module>ashetm-wallet-back-end-payment-hedera</module>
